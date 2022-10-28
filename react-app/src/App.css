@@ -70,6 +70,14 @@ body {
   outline: none;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+}
+
 .cards-container {
   display: flex;
   max-width: 80rem;
@@ -222,6 +230,10 @@ body {
   padding: 10px;
 }
 
+.form_input:hover {
+  cursor: pointer;
+}
+
 select {
   height: 30px;
 }
@@ -251,6 +263,11 @@ fieldset {
 
 /* Form-card */
 
+.form-card__text {
+  font-size: 14px;
+  padding: 4px;
+}
+
 .form-card__image {
   width: fit-content;
   height: 100px;
@@ -259,11 +276,11 @@ fieldset {
 
 .form-cards__container {
   display: flex;
-  max-width: 80rem;
-  padding: 1.5rem 3rem;
+  max-width: 800px;
+  margin-top: 20px;
   justify-content: space-between;
   flex-wrap: wrap;
-  column-gap: 1rem;
+  column-gap: 10px;
 }
 
 /* Modal */

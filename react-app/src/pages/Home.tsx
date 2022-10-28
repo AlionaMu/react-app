@@ -8,7 +8,7 @@ function Home(props: any) {
     return (
       <div>
         <h1>This is the Home page</h1>
-        { props.loading ?
+        { props.loading ? 
           <Loader></Loader> :
           <CardList 
             items={items} 
