@@ -21,8 +21,6 @@ function Header(props: any) {
             </ul>
           </nav>
           <SearchBar 
-            setCardsList={props.setCardsList} 
-            cardsList={props.cardsList} 
             loading={props.loading} 
             setLoading={props.setLoading}>
           </SearchBar>

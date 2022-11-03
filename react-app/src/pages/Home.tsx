@@ -1,9 +1,11 @@
-import { Item } from '../components/CardItem';
 import CardList from '../components/CardList';
 import Loader from '../components/Loader';
 
+import { useContext } from 'react';
+import { GlobalContext } from '../context';
+
 function Home(props: any) {
-    const items: Item[] = props.cardsList;
+ const {cardsList} = useContext(GlobalContext);
 
     return (
       <div>
@@ -11,7 +13,7 @@ function Home(props: any) {
         { props.loading ? 
           <Loader></Loader> :
           <CardList 
-            items={items} 
+            items={cardsList} 
             modal={props.modal} 
             setModal={props.setModal} 
             setCardId={props.setCardId} 

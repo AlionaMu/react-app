@@ -1,7 +1,7 @@
 import CardItem, { Item } from './CardItem';
 
 const CardList = (props: any) => {
-  
+
   return (
     <>
       { 
@@ -24,4 +24,4 @@ const CardList = (props: any) => {
   );
 };
   
-  export default CardList;
+export default CardList;

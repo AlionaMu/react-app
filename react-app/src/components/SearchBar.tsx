@@ -1,23 +1,17 @@
 import FetchService from '../API/FetchService';
+import { useGlobalContext } from '../context';
 
 export function SearchBar(props: any) {
-
+  const { setCardsList } = useGlobalContext();
   const onKeyPressHandler = (event: any) => {
    
     if (event.which === 13) {
       props.setLoading(true);
-
-// setTimeout is added to demonstrate Loading 
-
-      setTimeout(() => {
        
         FetchService.getPosts(event.target.value).then((res) => {
-          props.setCardsList([...res.items]);
+          setCardsList([...res.items]);
           props.setLoading(false);
         })
-
-      }, 3000)
-
     }
   }
 
@@ -27,7 +21,7 @@ export function SearchBar(props: any) {
         className="search-bar" 
         data-testid="simple-input" 
         type="text" 
-        placeholder='search'
+        placeholder= 'search'
         onKeyPress={(event: any) => onKeyPressHandler(event)}
       >
       </input>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Checkbox, FormControlLabel, MenuItem, Radio, RadioGroup, Select } from '@mui/material';
+import { GlobalContext, useGlobalContext } from '../context';
 
 enum GenderEnum {
   female = 'Female',
@@ -32,16 +33,22 @@ export const defaultValues: FormInfo = {
   select: ''
 }
 
-const Form = ({create}: any) => {  
+const Form = () => {  
 
   const [disabled, setDisabled] = useState(true);
   const { register, handleSubmit, control, formState: { errors }, } = useForm<FormInfo>({
     defaultValues
   });
 
+  const { formsList, setFormsList } = useGlobalContext();
+
+  const createFormCard = (newCard: FormInfo) => {
+    formsList.length ? setFormsList([...formsList, newCard]) : setFormsList([newCard])
+  }
+
   const onSubmit:SubmitHandler<FormInfo>  = data => {    
     data.img = URL.createObjectURL(data.img[0]);
-    create(data);
+    createFormCard(data);
   }
 
   const setButtonAble = () => {

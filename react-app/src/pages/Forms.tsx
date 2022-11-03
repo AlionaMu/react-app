@@ -1,33 +1,15 @@
-import { useMemo, useState, useEffect } from 'react';
-import Form, { FormInfo } from '../components/Form';
+import Form from '../components/Form';
 import FormCardList from '../components/FormCardList';
+import { useGlobalContext } from '../context';
 
 function Forms() {
-  const arr: FormInfo[] = [];
-  const [list, setList] = useState(arr);
-
-    const memoList: FormInfo[] = useMemo(() => {
-    return list;
-  }, [list, setList]);
-
-  const formProps = { 
-    memoList: memoList,
-    setList: setList
-  } 
-
-  useEffect(() => {
-    list;
-  }, [list, setList])
-
-  const creatFormCard = (newCard: FormInfo) => {
-    list.length ? setList([...list, newCard]) : setList([newCard])
-  }
+  const { formsList } = useGlobalContext();
 
   return (
     <main className='main'>
       <h1>FORMS</h1>
-      <Form create={creatFormCard} />
-      <FormCardList {...formProps} />
+      <Form />
+      <FormCardList list={formsList} />
     </main>
   )
 }
