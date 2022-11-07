@@ -10,8 +10,6 @@ const CardList = (props: any) => {
           { props.items.map((item: Item) => {
             return <CardItem
               props={item} 
-              modal={props.modal} 
-              setModal={props.setModal} 
               key={item.id.videoId} 
               setCardId={props.setCardId} 
               cardId={props.cardId}/>

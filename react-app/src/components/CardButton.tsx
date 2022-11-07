@@ -1,13 +1,10 @@
-const CardButton = (props: any) => {
+import { Link } from 'react-router-dom';
 
-  const openModal = () => {
-    props.setModal(true);
-    props.setCardId(props.cardId);
-  }
+const CardButton = (props: any) => {
 
   return (
     <>
-      <button className='card__button button' onClick={openModal} >{props.text}</button>
+      <button className='card__button button'><Link to="/video"></Link>{props.text}</button>
     </>
   );
 };

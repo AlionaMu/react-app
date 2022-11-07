@@ -31,7 +31,7 @@ body {
   padding-top: 5rem;
   margin: 0 auto;
   padding: 2rem;
-  max-width: 120rem;
+  /*max-width: 120rem;*/
 }
 
 .search-bar {
@@ -95,6 +95,11 @@ body {
 .card__button {
   height: 70px;
   width: 100px;
+}
+
+.card__button > *, .detailed-info__back-button > * {
+  color: var(--wrapper-color);
+  text-decoration: none;
 }
 
 .card {
@@ -358,3 +363,113 @@ fieldset {
   }
 }
 
+/* Sorting */
+
+.sorting__input > select {
+  width: 150px;
+  border-radius: 9px;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 5px;
+}
+
+/* Pagination */
+
+.pagination__container {
+  margin: 15px auto;
+}
+
+.pagination__button {
+  margin: 5px;
+  background-color: var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 9px;
+  border: none;
+}
+.pagination__button:hover {
+  cursor: pointer;
+  background-color: var(--text-color);
+  opacity: 0.9;
+}
+.pagination__button:active {
+  background-color: var(--hover-color);
+}
+
+.pagination__button_current {
+  border: 2px solid var(--active-color);
+  background-color: var(--text-color);
+  font-weight: 600;
+}
+
+/* detailed info */
+
+.detailed-info {
+  display: flex;
+  justify-content: center;
+  margin: 30px 20px 10px;
+}
+  @include tablet {
+    justify-content: center;
+  }
+  .detailed-info__back-button {
+    min-width: 32px;
+    height: 32px;
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .detailed-info__back-button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  .detailed-info__container {
+    display: flex;
+    box-shadow: 5px 5px 20px var(--button-color);
+  }
+  @media (max-width: 1000px) {
+    .detailed-info__container {
+      width: 500px;
+      flex-direction: column;
+    }
+  }
+
+  .detailed-info__img {
+    min-width: none;
+  }
+  .detailed-info__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    padding: 35px;
+  }
+  .detailed-info__item-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .detailed-info__info-content {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .detailed-info__date {
+    align-self: end;
+    font-size: 10px;
+    font-weight: 400;
+    width: 200px;
+    color: var(--hover-color);
+  }
+  .detailed-info__description-title {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .detailed-info__description-text {
+    height: 180px;
+    width: 100%;
+    font-size: 12px;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+    color: var(--hover-color)
+  }

@@ -1,17 +1,26 @@
+import { useContext } from 'react';
+import { sortAndDeduplicateDiagnostics } from 'typescript';
 import FetchService from '../API/FetchService';
-import { useGlobalContext } from '../context';
+import { AppContext } from '../context';
+import { Types } from '../reducers/reducers';
 
 export function SearchBar(props: any) {
-  const { setCardsList } = useGlobalContext();
+  const {state, dispatch } = useContext(AppContext);
+  
   const onKeyPressHandler = (event: any) => {
-   
+    const value = event.target.value;
+    state.search = value;
+    const token = state.pageToken.length ? state.pageToken : ''
     if (event.which === 13) {
       props.setLoading(true);
-       
-        FetchService.getPosts(event.target.value).then((res) => {
-          setCardsList([...res.items]);
-          props.setLoading(false);
-        })
+      FetchService.getPosts(value, state.sort, token).then((res) => {
+        state.pageToken = res.nextPageToken;
+        dispatch({
+          type: Types.Search,
+          payload: res.items
+        });
+        props.setLoading(false);
+      })
     }
   }
 

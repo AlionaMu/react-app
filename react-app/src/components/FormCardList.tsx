@@ -1,11 +1,12 @@
 import FormCard from './FormCard';
 
 const FormCardList = ({list}: any) => {
+
   return (
     <>
       { list ?
         <div className="form-cards__container">
-          { list.map((item: any, i: number) => {
+          { list.products.map((item: any, i: number) => {
               return <FormCard props={item} key={i+1} id={i+1}/>
             })}
         </div> :
