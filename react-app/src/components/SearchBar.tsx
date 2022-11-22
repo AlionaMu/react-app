@@ -1,24 +1,24 @@
-import { useContext } from 'react';
-import { sortAndDeduplicateDiagnostics } from 'typescript';
 import FetchService from '../API/FetchService';
-import { AppContext } from '../context';
-import { Types } from '../reducers/reducers';
+import { search, setSearch } from '../store/cardsListSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 export function SearchBar(props: any) {
-  const {state, dispatch } = useContext(AppContext);
+  const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state.cardsList)
   
   const onKeyPressHandler = (event: any) => {
+
     const value = event.target.value;
-    state.search = value;
-    const token = state.pageToken.length ? state.pageToken : ''
+
     if (event.which === 13) {
       props.setLoading(true);
-      FetchService.getPosts(value, state.sort, token).then((res) => {
-        state.pageToken = res.nextPageToken;
-        dispatch({
-          type: Types.Search,
-          payload: res.items
-        });
+
+    FetchService.getPosts(value, state.sort, state.nextPageToken).then((res) => {
+
+        dispatch(setSearch(value));
+        dispatch(search(res));
+   
         props.setLoading(false);
       })
     }

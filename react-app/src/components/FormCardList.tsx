@@ -1,7 +1,6 @@
 import FormCard from './FormCard';
 
 const FormCardList = ({list}: any) => {
-
   return (
     <>
       { list ?

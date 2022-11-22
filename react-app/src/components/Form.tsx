@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Checkbox, FormControlLabel, MenuItem, Radio, RadioGroup, Select } from '@mui/material';
-import { AppContext } from '../context';
-import { Types } from '../reducers/reducers';
+import { useDispatch } from 'react-redux'
+import { create } from '../store/productsSlice';
 
 enum GenderEnum {
   female = 'Female',
@@ -36,17 +36,14 @@ export const defaultValues: FormInfo = {
 
 const Form = () => {  
 
-  const { dispatch } = useContext(AppContext);
+  const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(true);
   const { register, handleSubmit, control, formState: { errors }, } = useForm<FormInfo>({
     defaultValues
   });
 
   const createFormCard = (newCard: FormInfo) => {
-   dispatch({
-    type: Types.Create,
-    payload: newCard
-  });
+    dispatch(create(newCard))
   }
 
   const onSubmit:SubmitHandler<FormInfo>  = data => {    

@@ -1,18 +1,17 @@
-import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FetchService from '../API/FetchService';
-import { AppContext } from '../context';
-import { Types } from '../reducers/reducers';
+import { RootState } from '../store';
+import { search } from '../store/cardsListSlice';
 
 const Pagination = () => {
-  const {state, dispatch } = useContext(AppContext);
-  const onClickHandler = (value: any) => {
-     const token = state.pageToken.length ? `&pageToken=${state.pageToken}` : ''
-    FetchService.getPosts(state.search, state.sort, token).then((res) => {
-      state.pageToken = res.nextPageToken;
-      dispatch({
-        type: Types.Search,
-        payload: res.items
-      });
+  const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state.cardsList)
+
+  const onClickHandler = (target: any) => {
+
+    FetchService.getPosts(state.search, state.sort, state.nextPageToken).then((res) => {  
+       dispatch(search(res))
+
     })
   }
   
@@ -22,14 +21,14 @@ const Pagination = () => {
           <button 
             value={'prev'}  
             className='pagination__button'
-            onClick={(value) => onClickHandler(value)}
+            onClick={(e) => onClickHandler(e.target)}
           >
           prev
           </button>
           <button 
             value={'next'} 
             className='pagination__button' 
-            onClick={(value) => onClickHandler(value)}
+            onClick={(e) => onClickHandler(e.target)}
           >
           next
           </button>

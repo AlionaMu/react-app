@@ -1,7 +1,7 @@
-import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FetchService from '../API/FetchService';
-import { AppContext } from '../context';
-import { Types } from '../reducers/reducers';
+import { RootState } from '../store';
+import { search, setSort } from '../store/cardsListSlice';
 import Select from './Select';
 
 export enum SortingEnum {
@@ -11,17 +11,18 @@ export enum SortingEnum {
 }
 
 const Sorting = () => { 
-  const { state, dispatch } = useContext(AppContext);
+
+  const state = useSelector((state: RootState) => state.cardsList);
+  const dispatch = useDispatch();
 
   const onChangeHandler = (sort: string) => {
-    state.sort = sort;
-    const token = state.pageToken.length ? `&pageToken=${state.pageToken}` : ''
-    FetchService.getPosts(state.search, state.sort, token).then((res) => {
-      dispatch({
-        type: Types.Search,
-        payload: res.items
-      });   
-    })
+
+    sort.length ? true : sort = 'relevance'
+
+   FetchService.getPosts(state.search, sort, state.nextPageToken).then((res) => {
+     dispatch(setSort(sort));
+     dispatch(search(res));
+   })
   }
 
   return (

@@ -1,7 +1,7 @@
 function NotFound() {
     return (
         <div>
-            <h1>This is the about page</h1>
+            <h1>404</h1>
         </div>
     )
 }

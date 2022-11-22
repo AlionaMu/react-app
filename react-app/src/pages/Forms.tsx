@@ -1,16 +1,16 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import Form from '../components/Form';
 import FormCardList from '../components/FormCardList';
-import { AppContext } from '../context';
+import type { RootState } from '../store/index';
 
 function Forms() {
-  const { state } = useContext(AppContext);
+  const stateProducts = useSelector((state: RootState) => state.products)
 
   return (
     <main className='main'>
       <h1>FORMS</h1>
       <Form />
-      <FormCardList list={state} />
+      <FormCardList list={stateProducts} />
     </main>
   )
 }

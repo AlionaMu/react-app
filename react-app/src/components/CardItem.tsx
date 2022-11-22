@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../context';
+import { RootState } from '../store';
+import { setDetailedInfo } from '../store/cardsListSlice';
 
 export interface Item {
   etag: string;
@@ -10,7 +11,7 @@ export interface Item {
 }
 
 export interface ItemId {
-  id: string;
+  kind: string;
   videoId: string;
 }
 
@@ -39,10 +40,13 @@ export interface ThumbContent {
 
 const CardItem = (props: any) => {
   const publishedAt = new Date(props.props.snippet.publishedAt).toLocaleString('ru');
-  const {state } = useContext(AppContext);
+  const state = useSelector((state: RootState) => state.cardsList)
+  const dispatch = useDispatch();
 
   const onClickHandler = () => {
-    state.detailedInfo = props.props;
+   // state.detailedInfo = props.props;
+
+    dispatch(setDetailedInfo(props.props));
   }
 
   return (

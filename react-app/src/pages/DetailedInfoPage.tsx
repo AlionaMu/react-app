@@ -1,10 +1,12 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../context';
+import { RootState } from '../store';
 
 function DetailedInfoPage() {
-  const { state } = useContext(AppContext);
+
+  const state = useSelector((state: RootState) => state.cardsList)
   const publishedAt = new Date(state.detailedInfo.snippet.publishedAt).toLocaleString('ru');
+  
   return (
     <div>
       <h1>This is the detailed info page</h1>
